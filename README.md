@@ -127,6 +127,7 @@ Goodbye!
 
    # Exemplo:
    gcc -o ship-encryptor ../my_solutions/ship_encryptor.c   # Linux
+   cl /Fe:ship-encryptor.exe ..\my_solutions\order_book.c   # Windows
    ```
 3. Executar o aplicativo:
    ```bash
@@ -135,6 +136,7 @@ Goodbye!
 
    # Exemplo:
    ./ship-encryptor         # Linux
+   ship-encryptor.exe       # Windows
    ```
 
 ## 👨‍💻 Autor

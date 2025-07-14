@@ -31,7 +31,6 @@ void exec_prompt(book *b);
 int read_input(book *b);
 void delete_order(book *b, int index);
 int realloc_book_orders(book *b);
-int clone_book(book *origin, book *clone);
 
 int main() {
     init_app();
