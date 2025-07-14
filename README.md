@@ -126,8 +126,8 @@ Goodbye!
    cl /Fe:<nome_do_executável> ..\my_solutions\<nome_do_arquivo>.c
 
    # Exemplo:
-   gcc -o ship-encryptor ../my_solutions/ship_encryptor.c   # Linux
-   cl /Fe:ship-encryptor.exe ..\my_solutions\order_book.c   # Windows
+   gcc -o ship-encryptor ../my_solutions/ship_encryptor.c       # Linux
+   cl /Fe:ship-encryptor.exe ..\my_solutions\ship_encryptor.c   # Windows
    ```
 3. Executar o aplicativo:
    ```bash
