@@ -154,6 +154,16 @@ int read_input(book *b) {
                         error = 1;
                         break;
                     }
+                    if(op.price <= 0) {
+                        fprintf(stderr, "\nInvalid price: %.2f. Must be greater than 0. In line %d\n", op.price, line_number);
+                        error = 1;
+                        break;
+                    }
+                    if(op.quantity <= 0) {
+                        fprintf(stderr, "\nInvalid quantity: %d. Must be greater than 0. In line %d\n", op.quantity, line_number);
+                        error = 1;
+                        break;
+                    }
                     b->count++;
                 case 1:
                     if(op.action == 1 && op.position > b->count) {
