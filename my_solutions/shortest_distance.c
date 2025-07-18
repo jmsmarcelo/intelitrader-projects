@@ -103,7 +103,7 @@ int input_values(int **arr, int *arr_len, int *arr_cap, int arr_num) {
         }
     }
     value = strtok(input, ",");
-    while(value) {
+    do {
         arr_val = strtol(value, &endptr, 10);
         if(endptr == value || *endptr != '\0') {
             fprintf(stderr, "Invalid number input: %s\n", value);
@@ -120,8 +120,7 @@ int input_values(int **arr, int *arr_len, int *arr_cap, int arr_num) {
             }
             (*arr)[(*arr_len)++] = arr_val;
         }
-        value = strtok(NULL, ",");
-    };
+    } while(value = strtok(NULL, ","));
     free(input);
     return 0;
 }
