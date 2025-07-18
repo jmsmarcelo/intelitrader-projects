@@ -12,6 +12,7 @@ int main() {
     return 0;
 }
 void init_prompt() {
+    int status = 0;
     int arr_1_cap;
     int *arr_1 = malloc(10 * sizeof(int));
     if(!arr_1) {
@@ -35,17 +36,17 @@ void init_prompt() {
         arr_1_len = 0;
         arr_2_cap = 10;
         arr_2_len = 0;
-        if(input_values(&arr_1, &arr_1_len, &arr_1_cap, 1) > 0) {
-            break;
+        status += input_values(&arr_1, &arr_1_len, &arr_1_cap, 1);
+        if(status == 0 && input_values(&arr_2, &arr_2_len, &arr_2_cap, 2) > 0) {
+            status++;
         }
-        if(input_values(&arr_2, &arr_2_len, &arr_2_cap, 2) > 0) {
-            break;
+        if(status == 0) {
+            int result[3];
+            get_smallest_distance(arr_1_len, arr_1, arr_2_len, arr_2, result);
+            printf("\nMinimum distance: %d (betwween %d in array 1 and %d in array 2)\n", result[0], result[1], result[2]);
         }
-        int result[3];
-        get_smallest_distance(arr_1_len, arr_1, arr_2_len, arr_2, result);
-        printf("\nMinimum distance: %d (betwween %d in array 1 and %d in array 2)\n\n", result[0], result[1], result[2]);
         while(1) {
-            printf("Input again(y), or quit(q)? ");
+            printf("\nInput again(y), or quit(q)? ");
             if(!fgets(buffer, sizeof(buffer), stdin)) {
                 fprintf(stderr, "Error reading input.\n");
                 continue;
@@ -84,6 +85,10 @@ int input_values(int **arr, int *arr_len, int *arr_cap, int arr_num) {
             fprintf(stderr, "Error reading input.\n");
             continue;
         }
+        if(buffer[0] == '\n') {
+            fprintf(stderr, "No input provided.\n");
+            continue;
+        }
         stop = strchr(buffer, '\n');
         if(stop) {
             buffer[strcspn(buffer, "\n")] = '\0';
@@ -107,6 +112,8 @@ int input_values(int **arr, int *arr_len, int *arr_cap, int arr_num) {
         arr_val = strtol(value, &endptr, 10);
         if(endptr == value || *endptr != '\0') {
             fprintf(stderr, "Invalid number input: %s\n", value);
+            free(input);
+            return 1;
         } else {
             if(*arr_len >= *arr_cap) {
                 *arr_cap += 10;
