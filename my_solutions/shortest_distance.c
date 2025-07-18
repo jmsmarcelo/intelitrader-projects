@@ -44,6 +44,8 @@ void init_prompt() {
             int result[3];
             get_smallest_distance(arr_1_len, arr_1, arr_2_len, arr_2, result);
             printf("\nMinimum distance: %d (betwween %d in array 1 and %d in array 2)\n", result[0], result[1], result[2]);
+        } else {
+            status = 0;
         }
         while(1) {
             printf("\nInput again(y), or quit(q)? ");
@@ -108,6 +110,11 @@ int input_values(int **arr, int *arr_len, int *arr_cap, int arr_num) {
         }
     }
     value = strtok(input, ",");
+    if(value == NULL || strlen(value) == 0) {
+        fprintf(stderr, "Invalid input.\n");
+        free(input);
+        return 1;
+    }
     do {
         arr_val = strtol(value, &endptr, 10);
         if(endptr == value || *endptr != '\0') {
@@ -121,7 +128,8 @@ int input_values(int **arr, int *arr_len, int *arr_cap, int arr_num) {
                 if(!arr_temp) {
                     fprintf(stderr, "Memory reallocation failed.\n");
                     *arr_cap -= 10;
-                    break;
+                    free(input);
+                    return 1;
                 }
                 *arr = arr_temp;
             }
